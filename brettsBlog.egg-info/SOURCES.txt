@@ -1,0 +1,14 @@
+README.txt
+setup.cfg
+setup.py
+brettsBlog.egg-info/PKG-INFO
+brettsBlog.egg-info/SOURCES.txt
+brettsBlog.egg-info/dependency_links.txt
+brettsBlog.egg-info/entry_points.txt
+brettsBlog.egg-info/not-zip-safe
+brettsBlog.egg-info/requires.txt
+brettsBlog.egg-info/top_level.txt
+brettsblog/__init__.py
+brettsblog/resources.py
+brettsblog/tests.py
+brettsblog/views.py

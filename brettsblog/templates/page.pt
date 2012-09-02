@@ -1,0 +1,6 @@
+<metal:main use-macro="load: structure.pt">
+  <div metal:fill-slot="main_content">
+    <div class="hero-unit"  tal:content="structure body">
+     </div>
+    </div>
+</metal:main>

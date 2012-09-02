@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>${page_title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/static/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/ico/apple-touch-icon-57-precomposed.png">
+
+    <link rel="stylesheet" href="/static/js/jwysiwyg/wysiwyg.css" type="text/css" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">${structure: static_info.blog_title}</a>
+          <div class="btn-group pull-right">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="icon-user"></i> ${username}
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="divider"></li>
+              <li><a href="/my_admin/logout">Sign Out</a></li>
+            </ul>
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="/">Home</a></li>
+            </ul>
+            <form class="navbar-search pull-left" action="">
+            <input type="text" class="search-query span2" placeholder="Search">
+          </form>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-fluid">
+      <header>
+        <h3>Blog Management</h3>
+        <div>
+          <ul class="nav nav-tabs">
+            <li class="active dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Posts<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="active" id="create"><a href="#new">Create New Post</a></li>
+                <li id="edit"><a href="#edit">Edit Posts</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pages<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li id="create_page"><a href="#new">Create New Page</a></li>
+                <li id="edit_page"><a href="#edit">Edit Pages</a></li>
+              </ul>
+            </li>
+            <li><a href="#buttons">Site Settings</a></li>
+          </ul>
+        </div>
+      </header>
+      <div class="row-fluid">
+
+        <div class="span12" id="newForm">
+            <div class="alert alert-success fade in out" style="display: none">
+          <button class="close" data-dismiss="alert">×</button>
+          <strong>Success:</strong>
+        </div>
+        <div class="alert alert-error fade in out" style="display: none">
+          <button class="close" data-dismiss="alert">×</button>
+          <strong>Error:</strong>
+        </div>
+          <form class="form-horizontal well"  id="new_post_form" action="${url}" method="post">
+        <fieldset>
+          <legend>New Blog Post</legend>
+          <div class="control-group">
+            <label class="control-label" for="title">Blog Title</label>
+            <div class="controls">
+              <input type="text" class="input-xxlarge" name="title">
+            </div>
+          </div>
+           <div class="control-group">
+            <label class="control-label" for="url">Blog URL</label>
+            <div class="controls">
+              <input type="text" class="input-xxlarge" name="url">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="category">Category</label>
+            <div class="controls">
+              <select name="category">
+                <option>programming</option>
+                <option>sports</option>
+                <option selected="selected">geek</option>
+                <option>fatherhood</option>
+                <option>personal</option>
+                <option>recreation</option>
+              </select>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="title">Tags</label>
+            <div class="controls">
+              <input type="text" class="input-xxlarge" name="tags">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="active">Active</label>
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" name="active" value=false>
+              </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="postBody">Post Body</label><br>
+            <div class="controls">
+              <textarea class="span12" name="postText" id="postBody" rows="30"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <input type="hidden" name="action_type" value='add'>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="reset" class="btn" id='form_reset'>Cancel</button>
+          </div>
+        </fieldset>
+      </form>
+
+        </div>
+
+        <div class="span12" id="newPageForm" style="display: none">
+            <div class="alert alert-success fade in out" style="display: none">
+          <button class="close" data-dismiss="alert">×</button>
+          <strong>Success:</strong>
+        </div>
+        <div class="alert alert-error fade in out" style="display: none">
+          <button class="close" data-dismiss="alert">×</button>
+          <strong>Error:</strong>
+        </div>
+          <form class="form-horizontal well"  id="new_page_form" action="${url}/pages" method="post">
+        <fieldset>
+          <legend>New Blog Page</legend>
+          <div class="control-group">
+            <label class="control-label" for="title">Page Title</label>
+            <div class="controls">
+              <input type="text" class="input-xxlarge" name="title">
+            </div>
+          </div>
+           <div class="control-group">
+            <label class="control-label" for="url">Page URL</label>
+            <div class="controls">
+              <input type="text" class="input-xxlarge" name="url">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="order">Page Order</label>
+            <div class="controls">
+              <input type="text" class="input-small" name="order">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="shortname">Shortname</label>
+            <div class="controls">
+              <input type="text" class="input-xxlarge" name="shortname">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="active">Active</label>
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" name="active" value=false>
+              </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="pageBody">Page Body</label><br>
+            <div class="controls">
+              <textarea class="span12" name="pageText" id="pageBody" rows="20"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <input type="hidden" name="action_type" value='add'>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="reset" class="btn" id='page_form_reset'>Cancel</button>
+          </div>
+        </fieldset>
+      </form>
+
+        </div>
+
+        <div class="span10" style="display: none" id="list">
+            <table id="postLists" class="table table-bordered table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Url</th>
+                    <th>Category</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+                <tbody id="listing_grid"></tbody>
+            </table>
+        </div>
+
+        <div class="span10" style="display: none" id="page_list">
+            <table id="postLists" class="table table-bordered table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Url</th>
+                    <th>Order</th>
+                    <th>Active</th>
+                    <th>Shortname</th>
+                    <th>Actions</th>
+                </tr>
+                <tbody id="page_listing_grid"></tbody>
+            </table>
+        </div>
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/static/js/bootstrap-transition.js"></script>
+    <script src="/static/js/bootstrap-alert.js"></script>
+    <script src="/static/js/bootstrap-modal.js"></script>
+    <script src="/static/js/bootstrap-dropdown.js"></script>
+    <script src="/static/js/bootstrap-scrollspy.js"></script>
+    <script src="/static/js/bootstrap-tab.js"></script>
+    <script src="/static/js/bootstrap-tooltip.js"></script>
+    <script src="/static/js/bootstrap-popover.js"></script>
+    <script src="/static/js/bootstrap-button.js"></script>
+    <script src="/static/js/bootstrap-collapse.js"></script>
+    <script src="/static/js/bootstrap-carousel.js"></script>
+    <script src="/static/js/bootstrap-typeahead.js"></script>
+    <!--jWsywig-->
+    <script type="text/javascript" src="/static/js/jwysiwyg/jquery.wysiwyg.js"></script>
+
+
+    <script type="text/javascript">
+  $(function(){
+      $('#postBody').wysiwyg({
+          controls: {
+                              html: {visible: true}
+                            } ,
+          css:  '../static/css/bootstrap_bb.css'
+
+      });
+      $('#pageBody').wysiwyg({
+          controls: {
+                              html: {visible: true}
+                            } ,
+          css:  '../static/css/bootstrap_bb.css'
+
+      });
+  });
+</script>
+<script type="text/javascript">
+   $(document).ready(function() {
+        $('.alerts').alert();
+
+        //handle the  new blog entry form
+        $('#new_post_form').submit(function(event){
+            event.preventDefault();
+            var url = $(this).attr('action')+'?postBlog=true';
+            var form_data = $(this).serializeArray();
+            $.post(url, form_data, function(data){
+                if(data.success){
+                    $('.alert-success').append(data.message);
+                    $('.alert-success').toggle();
+                    $('#new_post_form').get(0).reset();
+                    window.scrollTo(0,0);
+                } else {
+                        $('.alert-error').append(data.message);
+                        $('.alert-error').toggle();
+                        window.scrollTo(0,0);
+                }
+            });
+        });
+
+        //detect the events
+        $('#create').click(function(){
+          //update the display
+          $(this).parent().children('li').removeClass('active');
+          $(this).addClass('active');
+          $('#list').hide();
+          $('#page_list').hide();
+          $('#newPageForm').hide();
+          $('#form_reset').click();
+          $('#newForm legend').html('New Blog Post');
+           $('#newForm input[name=action_type]').val('add');
+          $('#newForm').show();
+        });
+
+        //detect the events
+        $('#create_page').click(function(){
+          //update the display
+          $(this).parent().children('li').removeClass('active');
+          $(this).addClass('active');
+          $('#list').hide();
+          $('#page_list').hide();
+          $('#newForm').hide();
+          $('#page_form_reset').click();
+          $('#newPageForm legend').html('New Blog Page');
+           $('#newPageForm input[name=action_type]').val('add');
+          $('#newPageForm').show()
+        });
+
+        //edit Posts Listing
+        $('#edit').click(function(){
+           //update the display
+          $(this).parent().children('li').removeClass('active');
+          $(this).addClass('active');
+          $('#listing_grid').html('');
+
+          getListings();
+          $('#newForm').hide();
+          $('#newPageForm').hide();
+          $('#page_list').hide();
+        });
+
+        //edit Page Listing
+        $('#edit_page').click(function(){
+           //update the display
+          $(this).parent().children('li').removeClass('active');
+          $(this).addClass('active');
+          $('#page_listing_grid').html('');
+
+          getPageListings();
+          $('#newForm').hide();
+          $('#newPageForm').hide();
+          $('#list').hide();
+        });
+
+        //delete existing posts
+        $('body').delegate('.delete_post', 'click', function(){
+          $.ajax({
+              url: '/my_admin/delete/?id='+$(this).attr('value'),
+              type: 'DELETE',
+              success: function(data){
+                $('#listing_grid').html('');
+                getListings();
+              }
+              })
+            return false;
+        });
+
+        //edit one post
+         $('body').delegate('.edit_post', 'click', function(){
+          //get a single post
+           $.ajax({
+              url: '/my_admin?editPost=true&id='+$(this).attr('value'),
+              success: function(data){
+                //create the tags string
+                var tags = '';
+                $.each(data.tags, function(index, tag){
+                  tags += tag+',';
+                })
+                tags = tags.replace(/,+$/, "");
+
+                //inject the data into the form
+                $('#newForm input[name=title]').val(data.title);
+                $('#newForm input[name=url]').val(data.url);
+                $('#newForm select[name=category]').val(data.category);
+                $('#newForm input[name=tags]').val(tags);
+                $('#newForm input[name=active]').prop("checked", data.active);
+                $('#newForm input[name=action_type]').val('edit');
+                $('#postBody').wysiwyg('setContent', data.blog_body);
+
+                $('#newForm legend').html('Edit Post');
+                $('#list').hide();
+                $('#page_list').hide();
+                $('#newForm').show();
+              }
+            });
+            return false;
+        });
+
+ });
+
+function getListings(){
+            $.getJSON('/my_admin?listPosts=true', {/*somedata*/}, function(json_data){
+            var table_obj = $('#listing_grid');
+           $.each(json_data, function(index, key){
+              $.each(key, function(i, item){
+                table_obj.append($('<tr><td>'+item.title+'</td><td>'+item.date+'</td><td>'+item.url+'</td><td>'+item.category+'</td><td>'+item.active+'</td><td><a href="#" class="edit_post" value="'+item.url+'"><i class="icon-pencil"></i></a><a href="#" class="delete_post" value="'+item.url+'"><i class="icon-remove"></i></a></td></tr>'));
+              })
+            })
+          });
+          $('#list').show();
+}
+
+function getPageListings(){
+            $.getJSON('/my_admin/pages?listPages=true', {/*somedata*/}, function(json_data){
+            var table_obj = $('#page_listing_grid');
+           $.each(json_data, function(index, key){
+              $.each(key, function(i, item){
+                table_obj.append($('<tr><td>'+item.title+'</td><td>'+item.url+'</td><td>'+item.order+'</td><td>'+item.active+'</td><td>'+item.shortname+'</td><td><a href="#" class="edit_page" value="'+item.url+'"><i class="icon-pencil"></i></a><a href="#" class="delete_page" value="'+item.url+'"><i class="icon-remove"></i></a></td></tr>'));
+              })
+            })
+          });
+          $('#page_list').show();
+}
+</script>
+
+  </body>
+</html>

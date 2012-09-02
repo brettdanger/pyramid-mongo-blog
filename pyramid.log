@@ -1,0 +1,39 @@
+Traceback (most recent call last):
+  File "../bin/pserve", line 8, in <module>
+    load_entry_point('pyramid==1.3.2', 'console_scripts', 'pserve')()
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/pyramid/scripts/pserve.py", line 47, in main
+    return command.run()
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/pyramid/scripts/pserve.py", line 290, in run
+    relative_to=base, global_conf=vars)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/pyramid/scripts/pserve.py", line 318, in loadapp
+    return loadapp(app_spec, name=name, relative_to=relative_to, **kw)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/paste/deploy/loadwsgi.py", line 247, in loadapp
+    return loadobj(APP, uri, name=name, **kw)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/paste/deploy/loadwsgi.py", line 272, in loadobj
+    return context.create()
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/paste/deploy/loadwsgi.py", line 710, in create
+    return self.object_type.invoke(self)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/paste/deploy/loadwsgi.py", line 203, in invoke
+    app = context.app_context.create()
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/paste/deploy/loadwsgi.py", line 710, in create
+    return self.object_type.invoke(self)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/paste/deploy/loadwsgi.py", line 146, in invoke
+    return fix_call(context.object, context.global_conf, **context.local_conf)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/paste/deploy/util.py", line 56, in fix_call
+    val = callable(*args, **kw)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/brettsBlog/brettsblog/__init__.py", line 14, in main
+    renderer='brettsblog:templates/mytemplate.pt')
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/pyramid/config/views.py", line 621, in wrapper
+    view = self.maybe_dotted(view)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/pyramid/config/__init__.py", line 810, in maybe_dotted
+    return self.name_resolver.maybe_resolve(dotted)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/pyramid/path.py", line 318, in maybe_resolve
+    return self._resolve(dotted, package)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/pyramid/path.py", line 325, in _resolve
+    return self._zope_dottedname_style(dotted, package)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/lib/python2.6/site-packages/pyramid/path.py", line 374, in _zope_dottedname_style
+    __import__(used)
+  File "/Users/bdangerfield/src/brettsblog/pyramid_blog/brettsBlog/brettsblog/views.py", line 9
+    def view2(request):
+    ^
+IndentationError: unexpected unindent

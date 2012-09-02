@@ -1,0 +1,25 @@
+<metal:main use-macro="load: structure.pt">
+<div metal:fill-slot="header">
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="span4">
+            <a class="brand" href="#">${structure: static_info.blog_title}</a>
+            <p class='tag-line'>${structure: static_info.site_motto}</p>
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li  tal:attributes="class 'active' if cur_page=='home' else default"><a href="/">Home</a></li>
+              <li tal:attributes="class 'active'  if cur_page=='about' else default"><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+</metal:main>

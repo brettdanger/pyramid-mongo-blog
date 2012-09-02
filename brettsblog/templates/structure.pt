@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>${page_title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Author">
+
+    <!-- Le styles -->
+    <link href="/static/css/bootstrap_bb.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/font-awesome.css">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/static/css/syntax/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/syntax/shThemeDefault.css" rel="stylesheet" type="text/css" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <!--<link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '${google_analytics}']);
+          _gaq.push(['_trackPageview']);
+
+            (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                              })();
+
+    </script>
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="span6 offset1">
+            <div class="logo"><img src="/static/img/bio48.png" /></div>
+            <a class="brand" href="/">${structure: static_info.blog_title}</a>
+            <p class='tag-line'>${structure: static_info.site_motto}</p>
+          </div>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li  tal:attributes="class 'active' if cur_page=='home' else default"><a href="/"><i class="icon-home icon-large"></i>Home</a></li>
+              <li tal:attributes="class 'active'  if cur_page=='about' else default"><a href="/page/about"><i class="icon-user icon-large"></i>About</a></li>
+              </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <div class="container content-body">
+      <div class="row">
+        <div class="span7 offset1">
+          <metal:content define-slot="main_content" />
+        </div><!--/span-->
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header"><i class="icon-user" style="font-size: 24px"></i>About Me</li>
+              </div></li>
+            </ul>
+          </div><!--/.well -->
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header"><i class="icon-list" style="font-size: 24px"></i>Categories</li>
+              <li><a href="/category/programming">Programming</a></li>
+              <li><a href="/category/sports">Sports</a></li>
+              <li><a href="/category/geek">Geek</a></li>
+              <li><a href="/category/fatherhood">Fatherhood</a></li>
+              <li><a href="/category/personal">Personal</a></li>
+              <li><a href="/category/recreation">Recreation</a></li>
+            </ul>
+          </div><!--/.well -->
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header"><i class="icon-calendar" style="font-size: 24px"></i>Recent Entries</li>
+              <li tal:repeat="title recent_titles"><a href="/post/${structure: title.url}">${structure: title.title}</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/static/js/bootstrap-transition.js"></script>
+    <script src="/static/js/bootstrap-alert.js"></script>
+    <script src="/static/js/bootstrap-modal.js"></script>
+    <script src="/static/js/bootstrap-dropdown.js"></script>
+    <script src="/static/js/bootstrap-scrollspy.js"></script>
+    <!--<script src="/static/js/bootstrap-tab.js"></script>-->
+    <script src="/static/js/bootstrap-tooltip.js"></script>
+    <script src="/static/js/bootstrap-popover.js"></script>
+    <script src="/static/js/bootstrap-button.js"></script>
+    <script src="/static/js/bootstrap-collapse.js"></script>
+    <script src="/static/js/bootstrap-carousel.js"></script>
+    <script src="/static/js/bootstrap-typeahead.js"></script>
+    <script type="text/javascript" src="/static/js/syntax/shCore.js"></script>
+    <script type="text/javascript" src="/static/js/syntax/shBrushPython.js"></script>
+    <script type="text/javascript">
+     SyntaxHighlighter.all()
+</script>
+  </body>
+</html>
+
