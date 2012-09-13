@@ -1,6 +1,0 @@
-<metal:main use-macro="load: structure.pt">
-<div metal:fill-slot="main_content">
-  <h2>Error</h2>
-  <p>${message}</p>
-   </div>
-</metal:main>

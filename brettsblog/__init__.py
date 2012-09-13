@@ -18,7 +18,7 @@ def main(global_config, **settings):
 
     session_factory = session_factory_from_settings(settings)
 
-    authn_policy = AuthTktAuthenticationPolicy('s0secret')
+    authn_policy = AuthTktAuthenticationPolicy('A@uth3ntic@t3')
     authz_policy = ACLAuthorizationPolicy()
 
     config = Configurator(settings=settings, root_factory=Root,  authentication_policy=authn_policy,  authorization_policy=authz_policy,  session_factory=session_factory)
@@ -57,5 +57,6 @@ def main(global_config, **settings):
     config.registry.settings['mongodb_conn'] = conn
     config.add_subscriber(add_mongo_db, NewRequest)
     config.add_subscriber(inject_renderer_globals, BeforeRender)
+    config.include('pyramid_jinja2')
     config.scan('brettsblog')
     return config.make_wsgi_app()

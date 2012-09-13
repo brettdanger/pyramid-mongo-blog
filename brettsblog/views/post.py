@@ -5,8 +5,8 @@ from pyramid.httpexceptions import HTTPNotFound
 from brettsblog.views.root import strip_tags
 
 
-@view_config(context='brettsblog:resources.Post',  renderer='brettsblog:templates/post.pt')
-@view_config(context='brettsblog:resources.PostName', name='', renderer='brettsblog:templates/post.pt')
+@view_config(context='brettsblog:resources.Post',  renderer='post.jinja2')
+@view_config(context='brettsblog:resources.PostName', name='', renderer='post.jinja2')
 def post(context, request):
     #get mongoDB posts
     blog_data = BlogData(request)
@@ -26,7 +26,7 @@ def post(context, request):
           'tags': post[u'tags']}
 
 
-@view_config(context='brettsblog:resources.PageName',  renderer='brettsblog:templates/page.pt')
+@view_config(context='brettsblog:resources.PageName',  renderer='page.jinja2')
 def page(context, request):
      #get mongoDB posts
     blog_data = BlogData(request, 'page')
@@ -40,8 +40,8 @@ def page(context, request):
           }
 
 
-@view_config(context='brettsblog:resources.Category',  renderer='brettsblog:templates/home_entry_list.pt')
-@view_config(context='brettsblog:resources.CategoryName',  name='', renderer='brettsblog:templates/home_entry_list.pt')
+@view_config(context='brettsblog:resources.Category',  renderer='home.jinja2')
+@view_config(context='brettsblog:resources.CategoryName',  name='', renderer='home.jinja2')
 def category_view(context, request):
      #get mongoDB posts
     blog_data = BlogData(request)
@@ -62,8 +62,8 @@ def category_view(context, request):
     return {'cur_page': 'home', 'page_title': 'Category: ' + context.__name__, 'entries': entries}
 
 
-@view_config(context='brettsblog:resources.Tag',  renderer='brettsblog:templates/home_entry_list.pt')
-@view_config(context='brettsblog:resources.TagName',  name='', renderer='brettsblog:templates/home_entry_list.pt')
+@view_config(context='brettsblog:resources.Tag',  renderer='home.jinja2')
+@view_config(context='brettsblog:resources.TagName',  name='', renderer='home.jinja2')
 def tag_view(context, request):
     #get mongoDB posts
     blog_data = BlogData(request)

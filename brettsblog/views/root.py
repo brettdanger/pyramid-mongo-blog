@@ -5,8 +5,8 @@ from pyramid.httpexceptions import HTTPFound
 import re
 
 
-@view_config(context='brettsblog:resources.Root', renderer='brettsblog:templates/home_entry_list.pt')
-@view_config(context='brettsblog:resources.Root', renderer='brettsblog:templates/home_entry_list.pt', name='home')
+@view_config(context='brettsblog:resources.Root', renderer='home.jinja2')
+@view_config(context='brettsblog:resources.Root', renderer='home.jinja2', name='home')
 def my_view(request):
     #get mongoDB posts
     blog_data = BlogData(request)
@@ -25,7 +25,7 @@ def my_view(request):
     return {'cur_page': 'home', 'page_title': 'Welcome to Brett\'s Blog', 'entries': entries}
 
 
-@view_config(context='pyramid.httpexceptions.HTTPNotFound', renderer='brettsblog:templates/404_error.pt')
+@view_config(context='pyramid.httpexceptions.HTTPNotFound', renderer='404_error.jinja2')
 def not_found(request):
     return{'message': 'Error 404, Page Not Found',  'cur_page': '', 'page_title': 'Requested Page Not Found'}
 

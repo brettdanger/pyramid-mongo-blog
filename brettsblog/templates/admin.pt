@@ -73,29 +73,29 @@
 
     <div class="container-fluid">
       <header>
-        <h3>Blog Management</h3>
+        <h3>Brett's Blog Management</h3>
         <div>
           <ul class="nav nav-tabs">
             <li class="active dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Posts<b class="caret"></b></a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" id="posts_menu">
                 <li class="active" id="create"><a href="#new">Create New Post</a></li>
                 <li id="edit"><a href="#edit">Edit Posts</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pages<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li id="create_page"><a href="#new">Create New Page</a></li>
-                <li id="edit_page"><a href="#edit">Edit Pages</a></li>
+              <ul class="dropdown-menu" id="pages_menu">
+                <li id="create_page" ><a href="#newPage">Create New Page</a></li>
+                <li id="edit_page" ><a href="#editPage">Edit Pages</a></li>
               </ul>
             </li>
             <li><a href="#buttons">Site Settings</a></li>
           </ul>
         </div>
       </header>
-      <div class="row-fluid">
 
+      <div class="row-fluid">
         <div class="span12" id="newForm">
             <div class="alert alert-success fade in out" style="display: none">
           <button class="close" data-dismiss="alert">×</button>
@@ -160,9 +160,10 @@
           </div>
         </fieldset>
       </form>
+      </div>
+    </div><!-- end row -->
 
-        </div>
-
+     <div class="row-fluid">
         <div class="span12" id="newPageForm" style="display: none">
             <div class="alert alert-success fade in out" style="display: none">
           <button class="close" data-dismiss="alert">×</button>
@@ -210,7 +211,7 @@
           <div class="control-group">
             <label class="control-label" for="pageBody">Page Body</label><br>
             <div class="controls">
-              <textarea class="span12" name="pageText" id="pageBody" rows="20"></textarea>
+              <textarea class="span12" name="pageText" id="pageBody" rows="30"></textarea>
             </div>
           </div>
           <div class="form-actions">
@@ -220,9 +221,10 @@
           </div>
         </fieldset>
       </form>
+      </div>
+    </div><!-- end row -->
 
-        </div>
-
+    <div class="row-fluid">
         <div class="span10" style="display: none" id="list">
             <table id="postLists" class="table table-bordered table-striped">
                 <tr>
@@ -236,7 +238,9 @@
                 <tbody id="listing_grid"></tbody>
             </table>
         </div>
+      </div><!-- end row -->
 
+      <div class="row-fluid">
         <div class="span10" style="display: none" id="page_list">
             <table id="postLists" class="table table-bordered table-striped">
                 <tr>
@@ -250,7 +254,6 @@
                 <tbody id="page_listing_grid"></tbody>
             </table>
         </div>
-
       </div><!--/row-->
 
       <hr>
@@ -290,13 +293,7 @@
           css:  '../static/css/bootstrap_bb.css'
 
       });
-      $('#pageBody').wysiwyg({
-          controls: {
-                              html: {visible: true}
-                            } ,
-          css:  '../static/css/bootstrap_bb.css'
 
-      });
   });
 </script>
 <script type="text/javascript">
@@ -325,11 +322,7 @@
         //detect the events
         $('#create').click(function(){
           //update the display
-          $(this).parent().children('li').removeClass('active');
-          $(this).addClass('active');
-          $('#list').hide();
-          $('#page_list').hide();
-          $('#newPageForm').hide();
+          updateTabs(this);
           $('#form_reset').click();
           $('#newForm legend').html('New Blog Post');
            $('#newForm input[name=action_type]').val('add');
@@ -339,41 +332,36 @@
         //detect the events
         $('#create_page').click(function(){
           //update the display
-          $(this).parent().children('li').removeClass('active');
-          $(this).addClass('active');
-          $('#list').hide();
-          $('#page_list').hide();
-          $('#newForm').hide();
+          updateTabs(this);
           $('#page_form_reset').click();
           $('#newPageForm legend').html('New Blog Page');
            $('#newPageForm input[name=action_type]').val('add');
           $('#newPageForm').show()
+
+          $('#pageBody').wysiwyg({
+          controls: {
+                              html: {visible: true}
+                            } ,
+          css:  '../static/css/bootstrap_bb.css'
+
+      });
         });
 
         //edit Posts Listing
         $('#edit').click(function(){
-           //update the display
-          $(this).parent().children('li').removeClass('active');
-          $(this).addClass('active');
+           updateTabs(this);
           $('#listing_grid').html('');
-
           getListings();
-          $('#newForm').hide();
-          $('#newPageForm').hide();
-          $('#page_list').hide();
+          $('#list').show();
         });
 
         //edit Page Listing
         $('#edit_page').click(function(){
            //update the display
-          $(this).parent().children('li').removeClass('active');
-          $(this).addClass('active');
+          updateTabs(this);
           $('#page_listing_grid').html('');
-
           getPageListings();
-          $('#newForm').hide();
-          $('#newPageForm').hide();
-          $('#list').hide();
+          $('#page_list').show();
         });
 
         //delete existing posts
@@ -398,9 +386,9 @@
                 //create the tags string
                 var tags = '';
                 $.each(data.tags, function(index, tag){
-                  tags += tag+',';
+                  tags += tag+', ';
                 })
-                tags = tags.replace(/,+$/, "");
+                tags = tags.replace(/, +$/, "");
 
                 //inject the data into the form
                 $('#newForm input[name=title]').val(data.title);
@@ -409,18 +397,44 @@
                 $('#newForm input[name=tags]').val(tags);
                 $('#newForm input[name=active]').prop("checked", data.active);
                 $('#newForm input[name=action_type]').val('edit');
-                $('#postBody').wysiwyg('setContent', data.blog_body);
 
                 $('#newForm legend').html('Edit Post');
                 $('#list').hide();
                 $('#page_list').hide();
                 $('#newForm').show();
+
+                //now set the wysiwyg editor
+                $('#postBody').wysiwyg('setContent', data.blog_body);
+
               }
             });
             return false;
         });
 
  });
+
+function updateTabs(tab){
+    var menu = $(tab).parent().attr('id');
+
+    //update the menu
+    if(menu==='posts_menu'){
+      $('#posts_menu').parent('li').addClass('active');
+      $('#pages_menu').parent('li').removeClass('active');
+    } else {
+      $('#posts_menu').parent('li').removeClass('active');
+      $('#pages_menu').parent('li').addClass('active');
+    }
+    //update the display
+    $(tab).parent().children('li').removeClass('active');
+    $(tab).addClass('active');
+
+    //hide content
+    $('#list').hide();
+    $('#newForm').hide();
+    $('#page_list').hide();
+    $('#newPageForm').hide();
+
+}
 
 function getListings(){
             $.getJSON('/my_admin?listPosts=true', {/*somedata*/}, function(json_data){
@@ -431,7 +445,6 @@ function getListings(){
               })
             })
           });
-          $('#list').show();
 }
 
 function getPageListings(){
@@ -443,7 +456,6 @@ function getPageListings(){
               })
             })
           });
-          $('#page_list').show();
 }
 </script>
 

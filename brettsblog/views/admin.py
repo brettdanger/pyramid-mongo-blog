@@ -24,7 +24,7 @@ def login(context, request):
     url = ''
     if request.scheme == 'http':
         request.scheme = 'https'
-        return HTTPFound(location=request.url)
+        #return HTTPFound(location=request.url)
     return {'message': 'login', 'cur_page': '', 'page_title': 'Welcome to Brett\'s Blog', 'url': url}
 
 
@@ -67,7 +67,7 @@ def new_post(context, request):
                     value = value.split(', ')
                 if key != 'postBlog' or key != 'action_type':
                     post_data[key] = value
-            post_data['author'] = 'author'
+            post_data['author'] = 'Brett Dangerfield'
             post_data['postDate'] = datetime.datetime.utcnow()
 
             #check to see if the post is active
@@ -91,7 +91,7 @@ def new_post(context, request):
                     value = value.split(', ')
                 if key != 'postBlog' or key != 'action_type':
                     post_data[key] = value
-            post_data['author'] = 'author'
+            post_data['author'] = 'Brett Dangerfield'
             post_data['postDate'] = datetime.datetime.utcnow()
 
             #check to see if the post is active
