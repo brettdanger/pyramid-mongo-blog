@@ -1,0 +1,11 @@
+{% extends "layout_right.jinja2" %}
+{% block title %}Page Not Found Error{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<div>
+  <h2>Error</h2>
+  <p>{{message}}</p>
+</div>
+{% endblock %}

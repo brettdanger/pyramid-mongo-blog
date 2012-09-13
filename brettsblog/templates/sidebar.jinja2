@@ -1,0 +1,31 @@
+<div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header"><i class="icon-user" style="font-size: 24px"></i>About Brett</li>
+
+        <li><p>Welcome to my blog! I am a software engineer/web developer in the Denver, CO metro. I will post my thoughts on technology, my awesome family, my awesome state, and on occasion my favorite sports teams - GO BRONCOS!</p></li>
+        <li><div class="btn-group social">
+            <a class="btn" href="http://www.twitter.com/brettdanger" target="_blank"><i class="icon-twitter"></i></a>
+            <a class="btn" href="http://www.facebook.com/brettdanger"  target="_blank"><i class="icon-facebook"></i></a>
+            <a class="btn" href="http://www.linkedin.com/pub/brett-dangerfield/8/150/392" target="_blank"><i class="icon-linkedin"></i></a>
+            <a class="btn" href="https://plus.google.com/107160679074366418534/posts/p/pub" target="_blank"><i class=" icon-google-plus"  target="_blank"></i></a>
+            <a class="btn" href="mailto:brett@brettdangerfield.com"><i class=" icon-envelope-alt"  target="_blank"></i></a>
+        </div></li>
+      </ul>
+    </div><!--/.well -->
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header"><i class="icon-list" style="font-size: 24px"></i>Categories</li>
+        <li><a href="/category/programming">Programming</a></li>
+        <li><a href="/category/sports">Sports</a></li>
+        <li><a href="/category/geek">Geek</a></li>
+        <li><a href="/category/fatherhood">Fatherhood</a></li>
+        <li><a href="/category/personal">Personal</a></li>
+        <li><a href="/category/recreation">Recreation</a></li>
+      </ul>
+    </div><!--/.well -->
+    <div class="well sidebar-nav">
+      <ul class="nav nav-list">
+        <li class="nav-header"><i class="icon-calendar" style="font-size: 24px"></i>Recent Entries</li>
+        {% for title in recent_titles %}<li><a href="/post/{{title.url}}">{{title.title}}</a></li>{% endfor %}
+      </ul>
+    </div><!--/.well -->

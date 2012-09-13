@@ -1,0 +1,12 @@
+{% extends "layout_right.jinja2" %}
+{% block title %}{{page_title}}{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+<div>
+  <div class="hero-unit">
+    {{body | safe}}
+  </div>
+</div>
+{% endblock %}
